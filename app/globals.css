@@ -1,4 +1,9 @@
 :root {
+  --header-height: clamp(64px, min(5vw, 8svh), 88px);
+  --scroll-inset: 0px;
+  --content-height: calc(100svh - var(--scroll-inset));
+  --hero-unit: min(calc(100vw / 1280), calc(100svh / 800));
+  --content-unit: min(calc(100vw / 1280), calc(var(--content-height) / 800));
   --paper: #e6e1d9;
   --ink: #424242;
   --body-ink: #524d43;
@@ -18,7 +23,7 @@ button, input, textarea { font: inherit; }
 :where(p, h1, h2, h3, h4, h5, h6, span, em, strong, small, a, li, blockquote, figcaption, label, input, textarea, code, pre) { -webkit-user-select: text; user-select: text; }
 :where(img, svg, svg *, canvas, video, iframe, hr) { -webkit-user-select: none; user-select: none; }
 ::selection { color: #211a13; background: #ec946e; }
-.landing-page { width: 100%; overflow: clip; background: var(--paper); }
+.landing-page { position: relative; margin-top: calc(0px - var(--header-height)); width: 100%; overflow: clip; background: transparent; }
 .design-frame { position: relative; width: 100%; overflow: clip; container-type: inline-size; }
 .design-canvas { position: absolute; top: 0; left: 50%; width: var(--frame-width); height: var(--frame-height); transform-origin: center top; transform: translateX(-50%) scale(var(--frame-scale, 1)); }
 .design-canvas > div { width: 100%; height: 100%; }
@@ -80,6 +85,51 @@ button, input, textarea { font: inherit; }
 .mobile-copyright { font: 8px/1.8 var(--mono); letter-spacing: .8px; text-transform: uppercase; color: #8c816b; }
 
 @media (max-width: 700px) {
+  :root { --header-height: 64px; }
+  .site-header-inner { width: 100%; padding-inline: 24px; }
+  .site-wordmark { font-size: 20px; }
+  .site-tagline { font-size: 10px; }
   .desktop-layout { display: none; }
   .mobile-layout { display: block; }
 }
+
+.site-header { position: relative; z-index: 50; height: var(--header-height); background: transparent; }
+.site-header-inner { height: 100%; width: min(100%, 160svh); margin-inline: auto; padding-inline: max(24px, calc(29 * var(--hero-unit))); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.site-wordmark { font-family: 'Source Serif 4 Variable', serif; font-size: clamp(22px, calc(24.789 * var(--hero-unit)), 34px); line-height: 1; letter-spacing: -.08em; color: #000; white-space: nowrap; }
+.site-wordmark em { font-weight: 400; }
+.site-tagline { font: clamp(10px, calc(12 * var(--hero-unit)), 16px)/1.33 var(--mono); letter-spacing: -.04em; text-align: right; color: #000; }
+html { scroll-padding-top: var(--scroll-inset); }
+@media (max-width: 700px) {
+  .site-header-inner { width: 100%; padding-inline: 24px; }
+  .site-wordmark { font-size: 20px; }
+  .site-tagline { font-size: 10px; }
+}
+
+/* Paper belongs to the page, never to an individual scene. */
+.paper-backdrop { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; background: var(--paper) url('/assets/paper-26-158-2.png') repeat; background-size: calc(375 * var(--hero-unit)) calc(625 * var(--hero-unit)); background-position: calc((100vw - min(100vw, 160svh)) / 2) 0; }
+.paper-backdrop-wash { position: absolute; top: 0; left: 50%; width: 1280px; height: 800px; transform-origin: center top; transform: translateX(-50%) scale(var(--paper-scale, 1)); }
+/* The client applies the numeric scale for engines without CSS typed division. */
+.desktop-layout .design-frame.paper,
+.desktop-layout .paper .design-canvas > div,
+.desktop-layout .manifesto-pin { background: transparent; }
+.desktop-layout .paper .design-canvas > div > [data-name='image 632'],
+.desktop-layout [data-node-id='26:2434'],
+.desktop-layout .d26_470_22,
+.desktop-layout .d26_1160_2,
+.desktop-layout .d26_1636_2 { display: none; }
+/* Some Figma ‘texture’ groups also own chapter copy and charts. Keep the
+   groups in layout; suppress only their material, never their descendants. */
+.desktop-layout .paper [data-name='texture'] { background: transparent; }
+#proof { mix-blend-mode: multiply; }
+@media (max-width: 700px) { .paper-backdrop-wash { display: none; } }
+
+/* One continuous, faint construction behind all three research chapters. */
+.research-sequence { position: relative; overflow: clip; }
+.research-grid-pin { position: sticky; top: 0; height: 100svh; margin-bottom: -100svh; display: flex; align-items: center; pointer-events: none; overflow: clip; }
+.research-grid-artwork { position: relative; width: 1280px; height: 800px; }
+.research-sequence > .design-frame [data-name='golden square'] { display: none; }
+
+/* These copied empty guide strips belong to the old per-frame material. */
+.desktop-layout .paper :is([data-node-id='26:1164'], [data-node-id='26:1640'], [data-node-id='26:1928'], [data-node-id='26:524'], [data-node-id='26:649'], [data-node-id='26:574']) { background: transparent; }
+/* White in the original flow illustration is paper, not a white card. */
+[data-node-id='26:1922'] { mix-blend-mode: multiply; }

@@ -130,8 +130,6 @@ export default function MobilePage() {
       </div>
       <div className="mobile-spiral"><Spiral /></div>
       <div className="mobile-cover"><Construction /></div>
-      <p className="mobile-wordmark">Identity<em>Labs</em></p>
-      <p className="mobile-corner-copy">world’s first<br/>content science firm</p>
     </div>
   );
 }

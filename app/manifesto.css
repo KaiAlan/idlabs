@@ -1,5 +1,5 @@
-.manifesto-story { position: relative; height: 340svh; }
-.manifesto-pin { position: sticky; top: 0; height: 100svh; display: flex; align-items: center; background: var(--paper) url('/assets/paper-26-158-2.png') repeat; background-size: min(29.296875vw, 46.875svh) min(48.828125vw, 78.125svh); background-position: calc((100vw - min(100vw, 160svh)) / 2) calc((100svh - min(62.5vw, 100svh)) / 2); }
+.manifesto-story { position: relative; height: calc(var(--content-height) * 3.4); }
+.manifesto-pin { position: sticky; top: var(--scroll-inset); height: var(--content-height); display: flex; align-items: center; background: var(--paper) url('/assets/paper-26-158-2.png') repeat; background-size: calc(375 * var(--content-unit)) calc(625 * var(--content-unit)); background-position: calc((100vw - min(100vw, var(--content-height) * 1.6)) / 2) calc((var(--content-height) - min(62.5vw, var(--content-height))) / 2); }
 .manifesto-frame { flex: none; }
 .manifesto-artwork { position: relative; width: 1280px; height: 800px; isolation: isolate; }
 .manifesto-title { position: absolute; left: 107px; top: 335px; font: 94px/normal 'Instrument Serif', serif; letter-spacing: -7.52px; color: #4a4a4a; }

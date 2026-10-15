@@ -1,0 +1,27 @@
+.dissection-story { position: relative; height: calc(var(--content-height) * 5.5); }
+.dissection-pin { position: sticky; top: var(--scroll-inset); height: var(--content-height); display: flex; align-items: center; }
+.dissection-artwork { position: relative; width: 1280px; height: 800px; }
+.dissection-tweet-host, .dissection-stamps { position: absolute; inset: 0; }
+.tweet-card { border: 0; }
+.tweet-card[data-focus]:not([data-focus='-1']) { box-shadow: 0 124px 156px rgba(0,0,0,.15); }
+.tweet-card:not([data-focus='-1']) :is([data-tweet-opening], [data-tweet-toolbar]) { filter: blur(4px); }
+.tweet-card:not([data-focus='-1']):not([data-focus='3']) [data-tweet-thread] { filter: blur(4px); }
+.tweet-card[data-focus='3'] [data-tweet-body] { filter: blur(4px); }
+.tweet-card[data-focus='3'] [data-tweet-thread] { font-weight: 700; }
+.tweet-card[data-focus='1'] [data-before-vinci] { display: block; filter: blur(4px); }
+.tweet-card[data-focus='1'] [data-vinci] { display: block; font-weight: 700; }
+.tweet-emphasis { font-weight: 700; }
+.tweet-specifics { font-weight: 600; }
+.dissection-stamp { position: absolute; top: 469px; width: 313.382px; height: 489.216px; }
+.stamp-art { position: absolute; inset: 0; transform: rotate(-.24deg); }
+.stamp-art-inner { position: relative; width: 311.37px; height: 487.935px; overflow: hidden; box-shadow: 0 10.031px 20.062px rgba(0,0,0,.13); }
+.stamp-art-inner > img { position: absolute; left: -24.8%; top: -9.6%; max-width: none; width: 149.59%; height: 119.2%; }
+.stamp-tint { position: absolute; left: 36px; top: 38px; width: 241px; height: 249px; background: rgba(225,225,213,.7); }
+.stamp-annotation { position: absolute; inset: 0; }
+.stamp-annotation h3 { position: absolute; top: 114px; font: italic 28px/24px 'Instrument Serif', serif; letter-spacing: -1px; color: #281e1d; white-space: nowrap; }
+.stamp-explanation { position: absolute; top: 150px; transform: translateX(-50%); width: 200.439px; max-width: none; }
+.stamp-number { position: absolute; top: 48px; left: 48px; width: 31px; height: 31px; }
+.stamp-number > img { position: absolute; inset: 0; }
+.stamp-number span { position: absolute; top: 4px; left: 6px; font: italic 24px/24px 'Instrument Serif', serif; letter-spacing: -1px; color: #fbf8da; }
+.dissection-reduced { display: none; }
+@media (prefers-reduced-motion: reduce) { .dissection-story { height: auto; } .dissection-pin { display: none; } .dissection-reduced { display: block; } }

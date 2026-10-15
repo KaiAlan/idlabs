@@ -26,17 +26,7 @@ export default function Design26_2432() {
             <span className="d26_2432_15">{` lab.`}</span>
           </p>
         </div>
-        <p className="d26_2432_16" data-node-id="26:2448">
-          world’s first
-          <br aria-hidden />
-          content science firm
-        </p>
       </div>
-      <p className="d26_2432_17" data-node-id="26:2449">
-        <span className="d26_2432_18">Identity</span>
-        <span className="d26_2432_19">{` `}</span>
-        <span className="d26_2432_20">Labs</span>
-      </p>
     </div>
   );
 }

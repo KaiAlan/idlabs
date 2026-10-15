@@ -129,6 +129,7 @@ def prepare(path):
     code=re.sub(r'export default function \w+\(',f'export default function {name}(',code)
     # The site has one branding header, in the hero only.
     repeated_headers = {
+        '26-2432': ['26:2448', '26:2449'],
         '26-2335': ['26:2346', '26:2347', '26:2348'],
         '26-521': ['26:546', '26:547', '26:548'],
         '26-549': ['26:561', '26:562', '26:563'],
@@ -136,9 +137,6 @@ def prepare(path):
         '26-601': ['26:610', '26:611', '26:612'],
         '26-646': ['26:655', '26:656', '26:657'],
     }
-    for header_id in repeated_headers.get(section, []):
-        # Hide source header nodes after class numbering to keep measured styles stable.
-        code = re.sub(r'(<p\b[^>]*data-node-id="' + re.escape(header_id) + r'")', r'\1 hidden', code)
     if section=='26-2450':
         code=code.replace('{`Become impossible to `}</span>', 'Become impossible</span><br/><span className="font-[\'Instrument_Serif:Regular\'] leading-none not-italic text-[120px]">to </span>')
     if section=='26-2335':
@@ -163,6 +161,9 @@ def prepare(path):
         rules[cname]=compile_classes(m[1])
         return 'className="'+cname+'"'
     code=re.sub(r'className="([^\"]*)"',class_replace,code)
+    # Remove repeated headers after numbering so measured figure classes stay stable.
+    for header_id in repeated_headers.get(section, []):
+        code = re.sub(r'\n\s*<p\b[^>]*data-node-id="' + re.escape(header_id) + r'"[^>]*>.*?</p>', '', code, flags=re.S)
     # The root always fills a document-flow section with an explicit aspect ratio.
     # Decorative SVGs use their exported intrinsic geometry, never global image sizing.
     code=re.sub(r'<img ([^>]*?)src=\{(\w+)\}([^>]*?)/>',lambda m:'<img '+m[1]+'src={'+m[2]+'}'+m[3]+' decoding="async" draggable={false} />',code)

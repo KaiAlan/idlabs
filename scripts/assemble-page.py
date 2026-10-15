@@ -7,24 +7,28 @@ desktop=[
  ('manifesto','Manifesto',800,'Manifesto','manifesto'),
  ('26-2335','ResearchCover',800,'The science of viral posts','research-cover'),
  ('26-1160','ClaimOne',4314,'Claim 1: Virality is not luck, it is engineering','science'),
- ('26-1636','ClaimTwo',4314,'Claim 2: Depth, quality, and impact are measurable','depth'),
+ ('26-1636','ClaimTwo',3808,'Claim 2: Depth, quality, and impact are measurable','depth'),
  ('26-1924','ClaimThree',3076,'Claim 3: Audience is built as a compounding function','audience'),
  ('26-521','Craft',1294,'The craft of creation','craft'),
- ('26-549','Post',800,'One post, dissected','dissection'),
- ('26-601','PostAnnotations',800,'The anatomy of a post','post-annotations'),
+ ('dissection','PostDissection',800,'One post, dissected','dissection'),
  ('26-646','Proof',800,'Our writers are followed by the people you are trying to reach','proof'),
  ('26-571','Statistics',800,'Four years of proof, measured','results'),
  ('26-2450','Footer',1445,'Become impossible to ignore','company'),
 ]
 imports="import DesignFrame from '../components/DesignFrame';\nimport MobilePage from '../components/MobilePage';\nimport MobileClosing from '../components/MobileClosing';\n"
-imports+='\n'.join(f"import {name} from '../components/manifesto/Manifesto';" if key=='manifesto' else f"import {name} from '../components/design/{key}';" for key,name,*_ in desktop)
+imports+='\n'.join(f"import {name} from '../components/manifesto/Manifesto';" if key=='manifesto' else f"import {name} from '../components/dissection/PostDissection';" if key=='dissection' else f"import {name} from '../components/design/{key}';" for key,name,*_ in desktop)
+imports+="\nimport ResearchBackdrop from '../components/ResearchBackdrop';"
 parts=[]
 for key,name,height,label,id in desktop:
- if key=='manifesto':
-  parts.append('        <Manifesto />')
+ if key in ['manifesto','dissection']:
+  parts.append(f'        <{name} />')
   continue
+ if key=='26-1160':
+  parts.append('        <div className="research-sequence"><div className="research-grid-pin" aria-hidden="true"><DesignFrame height={800} label="Research background construction"><ResearchBackdrop /></DesignFrame></div>')
  paper='' if key in ['26-2335','26-2450'] else 'paper'
  parts.append(f'        <DesignFrame height={{{height}}} label="{label}" id="{id}" className="{paper}"><{name} /></DesignFrame>')
+ if key=='26-1924':
+  parts.append('        </div>')
 page=imports+'''\n\nexport default function Home() {
   return (
     <main className="landing-page">
@@ -68,8 +72,6 @@ export default function MobilePage() {
       </div>
       <div className="mobile-spiral"><Spiral /></div>
       <div className="mobile-cover"><Construction /></div>
-      <p className="mobile-wordmark">Identity<em>Labs</em></p>
-      <p className="mobile-corner-copy">world’s first<br/>content science firm</p>
     </div>
   );
 }
