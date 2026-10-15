@@ -1,9 +1,9 @@
-.dissection-story { position: relative; height: calc(var(--content-height) * 5.5); }
+.dissection-story { position: relative; height: calc(var(--content-height) * 4.5); }
 .dissection-pin { position: sticky; top: var(--scroll-inset); height: var(--content-height); display: flex; align-items: center; }
 .dissection-artwork { position: relative; width: 1280px; height: 800px; }
-.dissection-tweet-host, .dissection-stamps { position: absolute; inset: 0; }
+.dissection-paper-content, .dissection-tweet-host, .dissection-stamps { position: absolute; inset: 0; }
 .tweet-card { border: 0; }
-.tweet-card[data-focus]:not([data-focus='-1']) { box-shadow: 0 124px 156px rgba(0,0,0,.15); }
+.tweet-card[data-focus]:not([data-focus='-1']) { box-shadow: 0 8px 24px rgba(0,0,0,.08); }
 .tweet-card:not([data-focus='-1']) :is([data-tweet-opening], [data-tweet-toolbar]) { filter: blur(4px); }
 .tweet-card:not([data-focus='-1']):not([data-focus='3']) [data-tweet-thread] { filter: blur(4px); }
 .tweet-card[data-focus='3'] [data-tweet-body] { filter: blur(4px); }

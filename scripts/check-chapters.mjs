@@ -28,14 +28,21 @@ for (const [width, height] of [[1280,800], [1920,1080], [768,800], [390,844]]) {
       await page.waitForTimeout(50);
       await page.screenshot({ path: `verification/chapter-${id}-${width}.png` });
     }
-    const grid = page.locator('.research-grid-pin');
+    const grid = page.locator('.research-grid-field');
     for (const id of ['science','depth','audience']) {
       await page.locator(`#${id}`).evaluate(element => scrollTo(0, element.getBoundingClientRect().top + scrollY + 200));
       await page.waitForTimeout(30);
-      assert.ok(Math.abs((await grid.boundingBox()).y) < 1, `${id}: shared grid stays stationary`);
+      const before = (await grid.boundingBox()).y;
+      await page.evaluate(() => scrollBy(0, 40));
+      await page.waitForTimeout(30);
+      assert.ok(Math.abs((await grid.boundingBox()).y - before + 40) < 1, `${id}: grid scrolls with printed content`);
     }
-    assert.equal(await page.locator('.research-grid-pin [data-name="golden square"]').count(), 2);
-    assert.equal(await page.locator('.research-sequence > .design-frame [data-name="golden square"]').evaluateAll(elements => elements.filter(element => getComputedStyle(element).display !== 'none').length), 0, 'No repeating chapter grid copies');
+    assert.equal(await page.locator('.research-grid-field').count(), 1);
+    assert.equal(await page.locator('.research-sequence > .design-frame [data-name="golden square"]').evaluateAll(elements => elements.filter(element => getComputedStyle(element).display !== 'none').length), 0, 'No per-chapter pattern restarts');
+    const chartPlacement = await page.locator('[data-node-id="26:1922"]').evaluate(element => ({ top: element.offsetTop, height: element.offsetHeight, sourceHeight: element.parentElement.offsetHeight }));
+    assert.equal(chartPlacement.sourceHeight, 4314, 'Original artboard retains percentage coordinate system');
+    assert.equal(chartPlacement.top, 2238, 'Flow illustration starts below its introduction');
+    assert.equal(chartPlacement.height, 658, 'Flow illustration retains original proportions');
     const gap = await page.evaluate(() => {
       const last = document.querySelector('[data-node-id="26:1699"]').getBoundingClientRect();
       const next = document.querySelector('[data-node-id="26:1929"]').getBoundingClientRect();

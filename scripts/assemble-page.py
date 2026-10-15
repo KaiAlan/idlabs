@@ -17,14 +17,14 @@ desktop=[
 ]
 imports="import DesignFrame from '../components/DesignFrame';\nimport MobilePage from '../components/MobilePage';\nimport MobileClosing from '../components/MobileClosing';\n"
 imports+='\n'.join(f"import {name} from '../components/manifesto/Manifesto';" if key=='manifesto' else f"import {name} from '../components/dissection/PostDissection';" if key=='dissection' else f"import {name} from '../components/design/{key}';" for key,name,*_ in desktop)
-imports+="\nimport ResearchBackdrop from '../components/ResearchBackdrop';"
+imports+="\nimport ResearchField from '../components/ResearchField';"
 parts=[]
 for key,name,height,label,id in desktop:
  if key in ['manifesto','dissection']:
   parts.append(f'        <{name} />')
   continue
  if key=='26-1160':
-  parts.append('        <div className="research-sequence"><div className="research-grid-pin" aria-hidden="true"><DesignFrame height={800} label="Research background construction"><ResearchBackdrop /></DesignFrame></div>')
+  parts.append('        <div className="research-sequence"><ResearchField />')
  paper='' if key in ['26-2335','26-2450'] else 'paper'
  parts.append(f'        <DesignFrame height={{{height}}} label="{label}" id="{id}" className="{paper}"><{name} /></DesignFrame>')
  if key=='26-1924':

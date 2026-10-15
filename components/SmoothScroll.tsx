@@ -11,7 +11,7 @@ export default function SmoothScroll() {
       lenis?.destroy();
       lenis = preference.matches ? undefined : new Lenis({
         autoRaf: true,
-        lerp: 0.085,
+        lerp: 0.16,
         smoothWheel: true,
         syncTouch: false,
         anchors: true,

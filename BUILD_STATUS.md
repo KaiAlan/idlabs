@@ -15,8 +15,8 @@
 - Supplied mobile composition plus adapted proof/statistics/footer.
 - Strict TypeScript, a production static export, and browser QA.
 - Lenis smooth wheel scrolling with native touch behavior and reduced-motion support.
-- One pinned desktop manifesto with three reversible scroll states, nonoverlapping vertical copy transitions, stationary heading, and SVG grid dividers that disappear between states.
-- Manifesto line and dot coordinates derive from the reference’s recursive half-size square lattice. The terminal corner ends with one dot. Decorative research chapter constructions use 8% opacity, reduced from 26%.
+- One pinned desktop manifesto with three reversible scroll states, nonoverlapping changes in ink opacity, stationary heading, and SVG grid dividers that disappear between states.
+- Manifesto line and dot coordinates derive from the reference’s recursive half-size square lattice. The terminal corner ends with one dot. Decorative research chapter constructions use 9.5% opacity, reduced from 26%.
 - Repeated section branding headers are removed. The single hero header uses normal scrolling with a transparent background; pinned scenes use the full viewport. Selection is enabled for text only.
 - Motion timing, easing, and responsive decisions are documented with primary sources in `MOTION_NOTES.md`.
 - Reduced-motion mode presents all three manifesto states in normal flow.
@@ -24,8 +24,8 @@
 
 ## Latest completed pass
 
-- One fixed paper texture and scan behind all desktop paper scenes, including hero/manifesto and craft through statistics. The cover and footer retain distinct materials.
-- One pinned post-dissection sequence: the same tweet moves upward, stamps rise, and four exact Figma annotations activate alongside corresponding tweet emphasis.
+- One moving paper texture and scan behind all paper scenes, including hero/manifesto and craft through statistics. The cover and footer retain distinct materials.
+- One pinned post-dissection sequence: the same tweet and stamps travel together with the paper before four exact Figma annotations activate in place alongside corresponding tweet emphasis.
 - Original handwritten explanations exported as transparent assets, preserving the supplied typeface.
 - Tweet gradient and annotation shadow match the source; proof notifications blend into the shared paper instead of using bright white panels. The material fallback is documented in `CREATIVE_SITE_ARCHITECTURE.md`.
 - Studio architecture research, decisions, and source links are saved in `CREATIVE_SITE_ARCHITECTURE.md`.
@@ -45,7 +45,16 @@ See `README.md` for run commands, the source-node map, and project structure; se
 ## Content and spacing regression repair
 
 - The global background cleanup had hidden `texture` groups containing real chapter copy, charts, all of Claim 3, and the craft iceberg. Those groups remain visible; only their background paint is transparent.
-- The three research chapters share one sticky construction layer made from the original SVG assets. The eighteen per-chapter construction copies no longer paint over the content or restart at chapter boundaries.
+- The three research chapters share one continuous scrolling construction field made from the original SVG assets. The eighteen per-chapter construction copies no longer paint over the content or restart at chapter boundaries.
 - Claim 2 ends at reference y=3808, removing 506px of unused artboard tail before Claim 3 while preserving every foreground element.
 - Empty copied guide strips no longer create vertical seams through the shared paper. The flow illustration blends its white paper into the common background.
 - Browser regression verification checks actual chapter text/chart visibility, every source image, continuous grid placement, chapter spacing, and desktop/mobile scaling.
+
+## Scrolling paper direction — approved and implemented
+
+- Fine grain and the hero's faded scan share one physical paper coordinate system. Broad masked overlaps continue the scan independently of section boundaries. Both textures extend across the viewport, including wide side margins.
+- Outside the two editorial pauses, paper travels exactly one pixel for each document pixel. The paper coordinate subtracts only the consumed hold distances, so pause entry/exit and reverse scrolling remain continuous.
+- Manifesto ink changes in place. The post heading/tweet/stamps travel together for 240 reference pixels, then paper and composition hold together while annotation emphasis changes. The post track is 4.5 viewports; Lenis smoothing is lighter (`lerp: .16`).
+- Research grid rows share a continuous document origin and scroll with the ink. Opacity increased slightly from .08 to .095 at the user's request.
+- Claim 2 retains its complete 4314px internal artboard while the outer section crops the unused tail at 3808px. Its flow illustration starts at y=2238, below its explanatory copy, and blends into the paper.
+- The supplied mobile reading layout uses the same continuous paper material; reduced motion removes both holds.

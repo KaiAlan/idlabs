@@ -2,9 +2,11 @@
 
 The final user direction is a normal, transparent header. It scrolls away with the hero. Pinned scenes use the full viewport; they reserve no sticky navbar space.
 
-The visible seams came from treating Figma presentation frames as independently painted web sections. The page now has one fixed `PaperBackdrop` behind all paper scenes. Its paper tile and scan remain at one viewport position through the hero, manifesto, research, craft, post dissection, proof, and statistics. Those scene roots are transparent. The antique cover and dark footer still paint their own distinct materials.
+The page uses one `PaperBackdrop` carrying fine grain and the original hero scan. Its viewport wrapper is fixed for compositing, but the paper sheet inside moves with document scroll. A shared physical coordinate subtracts the two consumed editorial hold distances. Ordinary paper therefore travels at exactly the same speed as ink; while a complete scene pauses, the paper pauses too. Entry and exit coordinates remain continuous in either direction.
 
-The content remains ordinary HTML and SVG. Only the material layer is fixed. The manifesto and post dissection each have a tall document-flow track and one native sticky viewport. Their normalized scroll progress drives the scene. Long research chapters and the craft/proof/statistics content retain their document flow over the common background.
+The scan has broad masked overlaps across physical paper coordinates rather than independent section backgrounds. Its width uses a separate uniform cover scale so wide margins retain the same material without stretching text or geometry. All paper scene roots remain transparent. The antique cover and dark footer keep their own materials.
+
+The research construction is one continuous field of original SVG geometry in normal document flow. Rows never restart at chapter boundaries. The foreground stays ordinary selectable HTML and local image/SVG assets. Only Manifesto and post dissection use native sticky viewports. Lenis has light smoothing; no spring or additional lag is applied to the paper coordinate.
 
 ## Research informing the implementation
 
@@ -20,7 +22,7 @@ These are implementation choices informed by those sources, not claims that ever
 
 Authoritative final-left nodes are the initial tweet `26:549` and annotation states `26:601`, `26:721`, `26:767`, `26:812`.
 
-The same tweet card moves from its original centered position upward by 240 reference pixels. The introduction heading fades and the four stamps rise from below. Each stamp then becomes active in turn, synchronized with the exact Figma tweet emphasis:
+The heading, tweet, and stamps move together through 240 reference pixels at document speed. Then the whole paper composition pauses. Annotations change ink opacity in place, and the heading fades as its print leaves the viewport. Each stamp then becomes active in turn, synchronized with the exact Figma tweet emphasis:
 
 1. “literally” + “everything”: an absolute claim pulling believers and skeptics into one reply thread.
 2. “the modern Da Vinci”: a familiar anchor making a large claim legible and quotable.
@@ -31,8 +33,14 @@ The original handwriting is exported from the four Figma text nodes as transpare
 
 Figma notification frames `26:661`, `26:673`, `26:685`, `26:697`, `26:709` use `LINEAR_BURN`, omitted by reference code. A multiply compositing fallback blends their white panels into the shared paper; it is not numerically identical to Figma's linear burn for colored pixels. The original cover continues to use its exact inverted-additive implementation. Stamp inactive materials are reduced to faint impressions and the active material is desaturated to reproduce the reference hierarchy.
 
-Reduced-motion mode presents the complete desktop sequences in normal flow. Mobile retains the supplied reading layout. The shared backdrop remains fixed on desktop; mobile omits the oversized scan layer. Text-only selection remains enabled.
+Reduced-motion mode presents the complete desktop sequences in normal flow. Mobile retains the supplied reading layout. The same scrolling material is used on desktop and mobile; reduced motion has no editorial holds. Text-only selection remains enabled.
 
 ## Repair: content containers are not material layers
 
-A Figma group named `texture` is not reliably a background-only group: in the research and craft frames it owns foreground content too. Never hide these groups to remove background paint. Clear the group's background and target only standalone scan layers. The chapter construction now belongs to a single sticky research backdrop using the original two mirrored SVG constructions, clipped to the complete research run. Source chapter copies are suppressed. Claim 2's unused 506px tail is omitted from document flow without changing its internal figure geometry.
+A Figma group named `texture` is not reliably a background-only group: in the research and craft frames it owns foreground content too. Never hide these groups to remove background paint. Clear the group's background and target only standalone scan layers. The chapter construction now belongs to a single scrolling research field using the original two mirrored SVG constructions, clipped to the complete research run. Source chapter copies are suppressed. Claim 2's unused 506px tail is omitted from document flow without changing its internal figure geometry.
+
+## Source geometry and proof
+
+The outer Claim 2 frame crops unused space, but its internal artboard must stay 4314px tall. Percentage-based image positions otherwise shift by 253px: the flow illustration moves from y=2238 to y=1985 and collides with the section label. The internal height now stays fixed, and compositing is applied at the chapter boundary to cross its layout stacking context.
+
+`check-paper.mjs` compares actual pixels as paper scrolls, checks the two pause boundaries at consecutive scroll positions in both directions, and verifies unified tweet/stamp movement and wide texture margins. `check-chapters.mjs` checks the flow image's source geometry and that no real content groups are hidden.

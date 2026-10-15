@@ -1,22 +1,23 @@
 import { cubicBezier } from 'motion';
-const ease = cubicBezier(.16, 1, .3, 1);
-const travel = cubicBezier(.65, 0, .35, 1);
 const fade = cubicBezier(.4, 0, .2, 1);
 const interval = (value: number, from: number, to: number) => Math.max(0, Math.min(1, (value - from) / (to - from)));
-export function getDissectionPose(progress: number) {
-  const focus = progress < .27 ? -1 : progress < .46 ? 0 : progress < .65 ? 1 : progress < .84 ? 2 : 3;
-  const entries = [[.27,.32],[.47,.51],[.66,.70],[.85,.89]];
-  const exits = [[.42,.45],[.61,.64],[.80,.83],[1.1,1.2]];
+
+// The first 240 reference pixels are ordinary paper travel. After that, the
+// complete composition pauses and only the printed emphasis changes.
+export function getDissectionPose(progress: number, referenceScrollSpan = 2800) {
+  const focus = progress < .11 ? -1 : progress < .33 ? 0 : progress < .55 ? 1 : progress < .77 ? 2 : 3;
+  const entries = [[.11,.15],[.33,.37],[.55,.59],[.77,.81]];
+  const exits = [[.29,.32],[.51,.54],[.73,.76],[1.1,1.2]];
   const arrival = focus < 0 ? 0 : interval(progress, ...entries[focus] as [number, number]);
   const departure = focus < 0 ? 0 : interval(progress, ...exits[focus] as [number, number]);
   return {
     focus,
-    tweetY: -240 * travel(interval(progress, .12, .26)),
-    headingOpacity: 1 - fade(interval(progress, .08, .16)),
-    stampsY: 380 * (1 - ease(interval(progress, .18, .30))),
-    stampsOpacity: fade(interval(progress, .18, .30)),
+    tweetY: -Math.min(240, progress * referenceScrollSpan),
+    headingOpacity: 1 - fade(interval(Math.min(240, progress * referenceScrollSpan), 190, 240)),
+    stampsY: 240,
+    stampsOpacity: 1,
     emphasis: fade(arrival) * (1 - fade(departure)),
-    explanationY: 10 * (1 - ease(arrival)) - 10 * ease(departure),
+    explanationY: 0,
   };
 }
 export type DissectionPose = ReturnType<typeof getDissectionPose>;

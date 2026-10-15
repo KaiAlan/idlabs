@@ -43,7 +43,7 @@ for (const progress of [0, .21, .27, .34, .45, .64, .71, .78, .9, .45, 0]) {
   assert.equal(sample.panelCount, 1, 'Only one text panel exists');
   assert.equal(sample.copyCount, 1, 'Only one copy state exists');
   assert.equal(sample.x, 0, 'Motion is vertical');
-  assert.ok(Math.abs(sample.y) <= 24.01, 'Movement stays restrained');
+  assert.equal(sample.y, 0, 'Ink stays registered to the paper');
   assert.ok(Math.abs(sample.pinTop) < 1, 'Manifesto remains pinned');
   assert.ok(Math.abs(sample.titleTop - 335) < 1, 'Title stays stationary');
   if ([0,.45,.9].includes(progress)) {
@@ -53,8 +53,8 @@ for (const progress of [0, .21, .27, .34, .45, .64, .71, .78, .9, .45, 0]) {
     assert.equal(sample.middleDivider, progress === .9 ? 0 : 1);
   }
   if ([.27,.71].includes(progress)) assert.equal(sample.opacity, 0, 'Exit finishes before entrance begins');
-  if ([.21,.64].includes(progress)) assert.ok(sample.y < 0 && sample.opacity > 0 && sample.opacity < 1, 'Old copy moves upward and fades');
-  if ([.34,.78].includes(progress)) assert.ok(sample.y > 0 && sample.opacity > 0 && sample.opacity < 1, 'New copy enters from below');
+  if ([.21,.64].includes(progress)) assert.ok(sample.opacity > 0 && sample.opacity < 1, 'Old ink fades in place');
+  if ([.34,.78].includes(progress)) assert.ok(sample.opacity > 0 && sample.opacity < 1, 'New ink appears in place');
   await page.screenshot({ path: `verification/manifesto-progress-${progress}.png` });
   samples.push({ progress, ...sample });
 }
@@ -82,7 +82,7 @@ assert.equal(await page.locator('.manifesto-title').first().evaluate(element => 
 await page.evaluate(y => scrollTo(0, y), bounds.top + bounds.distance + 300);
 await page.waitForTimeout(120);
 assert.ok(await page.locator('.manifesto-pin').evaluate(element => element.getBoundingClientRect().top < -250), 'Sequence releases into next section');
-assert.ok(await page.locator('[data-name="golden square"]').evaluateAll(elements => elements.every(element => getComputedStyle(element).opacity === '0.08')));
+assert.ok(await page.locator('[data-name="golden square"]').evaluateAll(elements => elements.every(element => getComputedStyle(element).opacity === '0.095')));
 await page.locator('#science').evaluate(element => scrollTo(0, element.offsetTop));
 await page.waitForTimeout(100);
 await page.screenshot({ path: 'verification/background-lines-softened.png' });
@@ -104,5 +104,5 @@ assert.equal(await page.locator('.manifesto-story:visible').count(), 0);
 assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), 390);
 assert.deepEqual(errors, []);
 await writeFile('verification/manifesto-report.json', JSON.stringify({earlyScroll,samples,sweep,terminal,errors,reducedMotion:'passed',mobile:'passed',resize:'passed',headers:'passed',selection:'passed'},null,2));
-console.log(`Passed: ${sweep.frames} motion samples without overlapping copy, vertical eased movement, exit/entry gap, reversible grid, one terminal dot, one hero header, text-only selection, resizing, reduced motion, mobile, and browser errors.`);
+console.log(`Passed: ${sweep.frames} motion samples without overlapping copy, ink changes in place, exit/entry gap, reversible grid, one terminal dot, one hero header, text-only selection, resizing, reduced motion, mobile, and browser errors.`);
 await browser.close();
