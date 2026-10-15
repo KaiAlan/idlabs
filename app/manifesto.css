@@ -1,0 +1,21 @@
+.manifesto-story { position: relative; height: 340svh; }
+.manifesto-pin { position: sticky; top: 0; height: 100svh; display: flex; align-items: center; background: var(--paper) url('/assets/paper-26-158-2.png') repeat; background-size: min(29.296875vw, 46.875svh) min(48.828125vw, 78.125svh); background-position: calc((100vw - min(100vw, 160svh)) / 2) calc((100svh - min(62.5vw, 100svh)) / 2); }
+.manifesto-frame { flex: none; }
+.manifesto-artwork { position: relative; width: 1280px; height: 800px; isolation: isolate; }
+.manifesto-title { position: absolute; left: 107px; top: 335px; font: 94px/normal 'Instrument Serif', serif; letter-spacing: -7.52px; color: #4a4a4a; }
+.manifesto-grid { position: absolute; inset: 0; width: 1280px; height: 800px; overflow: visible; pointer-events: none; }
+.manifesto-grid line { stroke: #78715f; stroke-width: 0.8; stroke-opacity: .65; }
+.manifesto-grid circle { fill: #514d3c; fill-opacity: .85; }
+.manifesto-highlight { position: absolute; left: 480px; top: 50px; width: 344px; height: 24px; background: #ff6f36; }
+.manifesto-state { position: absolute; inset: 0; }
+.manifesto-state > div { width: 100%; height: 100%; background: transparent; }
+.manifesto-state > div > * { display: none; }
+.manifesto-state-1 > div > :is([data-node-id='26:474'], [data-node-id='26:475'], [data-node-id='26:476']),
+.manifesto-state-2 > div > :is([data-node-id='26:493'], [data-node-id='26:494'], [data-node-id='26:495']),
+.manifesto-state-3 > div > :is([data-node-id='26:508'], [data-node-id='26:514']) { display: block; }
+.manifesto-reduced { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .manifesto-story { height: auto; }
+  .manifesto-pin { display: none; }
+  .manifesto-reduced { display: block; }
+}

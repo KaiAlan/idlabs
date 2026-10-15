@@ -1,4 +1,7 @@
 /* Corrections for pattern fills omitted by Figma's reference-code response. */
+/* These are the decorative chapter constructions, never foreground charts. */
+[data-name='golden square'] { opacity: 0.08; pointer-events: none; }
+
 [data-node-id='26:2451'] {
   background: #3c2e23 url('/assets/footer-noise.png') 0 0 / 1310px 1406px no-repeat;
 }

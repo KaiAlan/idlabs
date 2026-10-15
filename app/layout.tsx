@@ -1,4 +1,6 @@
 import type { Metadata, Viewport } from 'next';
+import SmoothScroll from '../components/SmoothScroll';
+import 'lenis/dist/lenis.css';
 import '@fontsource/instrument-serif/latin-400.css';
 import '@fontsource/instrument-serif/latin-400-italic.css';
 import '@fontsource/imperial-script/latin-400.css';
@@ -21,6 +23,7 @@ import '@fontsource/playfair-display/latin-500-italic.css';
 import './globals.css';
 import './design.css';
 import './refinements.css';
+import './manifesto.css';
 
 export const metadata: Metadata = {
   title: 'Identity Labs — The world’s first content science lab',
@@ -31,5 +34,5 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { width: 'device-width', initialScale: 1, themeColor: '#e6e1d9' };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body>{children}</body></html>;
+  return <html lang="en"><body><SmoothScroll />{children}</body></html>;
 }

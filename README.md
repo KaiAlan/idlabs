@@ -24,9 +24,12 @@ The production build exports a standalone static website to `out/`.
 
 - Next.js App Router, React, and TypeScript with strict checking.
 - Custom CSS; no Tailwind or shadcn dependencies.
+- Lenis for smooth wheel scrolling; Motion for the scroll-linked manifesto sequence.
 - Self-hosted fonts through Fontsource. The website makes no Figma or Google Fonts requests at runtime.
 - `app/page.tsx`: the final left-hand desktop sequence and responsive mobile composition.
 - `components/design/`: individual Figma sections and figures using local original assets and selectable text.
+- `components/manifesto/`: one pinned desktop manifesto with three text states and a calculated SVG grid.
+- `components/SmoothScroll.tsx`: Lenis lifecycle and reduced-motion support.
 - `components/DesignFrame.tsx`: document-flow frames sharing the desktop scale `min(viewportWidth / 1280, viewportHeight / 800)`. Text and golden-ratio artwork scale uniformly; backgrounds fill the viewport. Its ResizeObserver handles layout only.
 - `components/MobilePage.tsx`: the supplied 390px mobile composition.
 - `components/MobileClosing.tsx`: responsive adaptations of the closing content missing from the supplied mobile frame.
@@ -36,7 +39,11 @@ The production build exports a standalone static website to `out/`.
 
 ## Scope of this pass
 
-The user requested visual fidelity first. Scroll animation, cover motion, popup behavior, post-dissection sequencing, navigation interactions, and the contact form are deferred. Footer destinations appear as static text until those destinations are provided and interactions are implemented.
+The desktop manifesto is one pinned section with three scroll-driven states. The first transition removes the top vertical divider; the second removes the middle horizontal divider and opens the upper part of the nested grid. Outgoing text fades and slides right; incoming text fades and slides in from the left. Scrolling upward reverses the same timeline. A stationary heading and original copy retain the source geometry. The reference manifesto lattice uses recursive half-size square subdivisions; the SVG calculates each line and dot directly. Other golden-ratio artwork retains its original proportions. Decorative chapter constructions use 8% opacity.
+
+Lenis smooths wheel scrolling, while touch scrolling remains native. With reduced motion enabled, Lenis is disabled and all three manifesto states appear in normal document flow. The supplied mobile composition stays in its original reading layout.
+
+Cover motion, popup behavior, post-dissection sequencing, navigation interactions, and the contact form are deferred. Footer destinations appear as static text until those destinations are provided and interactions are implemented.
 
 The main desktop source nodes are:
 
@@ -59,6 +66,8 @@ Figma copy is preserved, including provisional statistics labels and example not
 ## Verification
 
 The build and strict TypeScript checks pass. Browser checks cover 390, 768, 1280, and 1440px widths, image decoding, font loading, JavaScript errors, missing assets, and horizontal overflow. Screenshots and reports are stored locally in the ignored `verification/` directory.
+
+`node scripts/check-manifesto.mjs` verifies wheel interpolation, both transitions in both directions, divider states, pin/release, line opacity, resizing, reduced motion, and mobile.
 
 `scripts/check-visuals.mjs` runs the browser checks against `VISUAL_PREVIEW_URL` (defaults to `http://localhost:3000`). It uses the Chromium installation available in the original workspace; adjust `executablePath` for another machine.
 

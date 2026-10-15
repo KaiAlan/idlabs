@@ -4,9 +4,7 @@ import pathlib,json,re
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 desktop=[
  ('26-2432','Hero',800,'The world’s first content science lab','introduction'),
- ('26-470','ManifestoOne',800,'Manifesto: attention and audience','manifesto'),
- ('26-482','ManifestoTwo',800,'Manifesto: virality can be engineered','manifesto-two'),
- ('26-497','ManifestoThree',800,'Manifesto: ideas shape the world','manifesto-three'),
+ ('manifesto','Manifesto',800,'Manifesto','manifesto'),
  ('26-2335','ResearchCover',800,'The science of viral posts','research-cover'),
  ('26-1160','ClaimOne',4314,'Claim 1: Virality is not luck, it is engineering','science'),
  ('26-1636','ClaimTwo',4314,'Claim 2: Depth, quality, and impact are measurable','depth'),
@@ -19,9 +17,12 @@ desktop=[
  ('26-2450','Footer',1445,'Become impossible to ignore','company'),
 ]
 imports="import DesignFrame from '../components/DesignFrame';\nimport MobilePage from '../components/MobilePage';\nimport MobileClosing from '../components/MobileClosing';\n"
-imports+='\n'.join(f"import {name} from '../components/design/{key}';" for key,name,*_ in desktop)
+imports+='\n'.join(f"import {name} from '../components/manifesto/Manifesto';" if key=='manifesto' else f"import {name} from '../components/design/{key}';" for key,name,*_ in desktop)
 parts=[]
 for key,name,height,label,id in desktop:
+ if key=='manifesto':
+  parts.append('        <Manifesto />')
+  continue
  paper='' if key in ['26-2335','26-2450'] else 'paper'
  parts.append(f'        <DesignFrame height={{{height}}} label="{label}" id="{id}" className="{paper}"><{name} /></DesignFrame>')
 page=imports+'''\n\nexport default function Home() {

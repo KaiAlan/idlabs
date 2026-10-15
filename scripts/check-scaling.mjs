@@ -26,7 +26,7 @@ for (const [width, height] of [[1280,800], [1920,1080], [1920,800], [2560,1080],
     return Math.abs(Number(frame.style.getPropertyValue('--frame-scale')) - expectedScale) < .00001;
   }, { desktop, expectedScale });
   const report = await page.evaluate(desktop => {
-    const sections = document.querySelectorAll(desktop ? '.desktop-layout > .design-frame' : '.mobile-layout > .design-frame');
+    const sections = [...document.querySelectorAll(desktop ? '.desktop-layout .design-frame' : '.mobile-layout > .design-frame')].filter(frame => frame.getBoundingClientRect().width > 0);
     return {
       width: innerWidth, height: innerHeight, documentWidth: document.documentElement.scrollWidth,
       frames: [...sections].map(frame => {
