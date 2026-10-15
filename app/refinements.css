@@ -1,0 +1,28 @@
+/* Corrections for pattern fills omitted by Figma's reference-code response. */
+[data-node-id='26:2451'] {
+  background: #3c2e23 url('/assets/footer-noise.png') 0 0 / 1310px 1406px no-repeat;
+}
+
+/* Pattern fills belong above the root scan, beneath their text and figures. */
+.paper [data-name='texture'] {
+  background-image: url('/assets/paper-26-158-2.png');
+  background-size: 375px 625px;
+  background-repeat: repeat;
+}
+
+/* Figma LINEAR_BURN uses max(0, A + B - 1). Inverted additive compositing
+   implements that operation using the unchanged original artwork. */
+[data-cover-material] { position: absolute; inset: 0; isolation: isolate; filter: invert(1); transform: scale(var(--background-cover-scale, 1)); transform-origin: center top; }
+[data-node-id='26:2336'] { filter: invert(1); }
+[data-node-id='26:2337'] { background: url('/assets/paper-26-158-2.png') 0 0 / 364.076px 606.794px repeat; }
+[data-node-id='26:2343'] { filter: invert(1); mix-blend-mode: plus-lighter; }
+[data-node-id='26:2344'] {
+  background: none;
+}
+[data-cover-texture] { position: absolute; inset: 0; background: url('/assets/paper-26-158-2.png') 0 0 / 375px 625px repeat; mix-blend-mode: multiply; transform: scale(var(--background-cover-scale, 1)); transform-origin: center top; }
+
+/* Source Serif's self-hosted variable font exposes this family name. */
+[data-node-id='26:3033'], [data-node-id='26:3551'],
+[data-node-id='26:3529'], [data-node-id='26:3641'] {
+  font-family: 'Source Serif 4 Variable', serif;
+}
