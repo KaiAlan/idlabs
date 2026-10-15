@@ -29,9 +29,27 @@ import './refinements.css';
 import './manifesto.css';
 import './dissection.css';
 
+const title = 'Identity Labs — The world’s first content science lab';
+const description = 'Attention compounds. Identity Labs studies the science of virality, the craft of creation, and the ideas that shape the world.';
+
 export const metadata: Metadata = {
-  title: 'Identity Labs — The world’s first content science lab',
-  description: 'Attention compounds. Identity Labs studies the science of virality, the craft of creation, and the ideas that shape the world.',
+  metadataBase: new URL('https://idlabs-hazel.vercel.app'),
+  title,
+  description,
+  openGraph: {
+    type: 'website',
+    url: '/',
+    siteName: 'Identity Labs',
+    title,
+    description,
+    images: [{ url: '/og-image.png', width: 1280, height: 800, alt: title }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+    images: [{ url: '/og-image.png', alt: title }],
+  },
   robots: { index: false, follow: false },
 };
 
