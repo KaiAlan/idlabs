@@ -22,8 +22,8 @@ export function StaticManifestoGrid({ state }: { state: number }) {
 }
 
 export default function ManifestoGrid({ progress }: { progress: MotionValue<number> }) {
-  const top = useTransform(progress, [0.16, 0.30], [1, 0]);
-  const middle = useTransform(progress, [0.60, 0.74], [1, 0]);
+  const top = useTransform(progress, [0.16, 0.28], [1, 0]);
+  const middle = useTransform(progress, [0.60, 0.72], [1, 0]);
   return <svg className="manifesto-grid" viewBox="0 0 1280 800" aria-hidden="true">
     {parts.map(part => <motion.g key={part} data-grid-part={part}
       style={{ opacity: part === 'fixed' ? 1 : part === 'top-divider' ? top : middle }}>

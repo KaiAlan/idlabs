@@ -7,6 +7,8 @@
 .manifesto-grid line { stroke: #78715f; stroke-width: 0.8; stroke-opacity: .65; }
 .manifesto-grid circle { fill: #514d3c; fill-opacity: .85; }
 .manifesto-highlight { position: absolute; left: 480px; top: 50px; width: 344px; height: 24px; background: #ff6f36; }
+.manifesto-copy-window { position: absolute; inset: 14px 46px 20px 468px; overflow: hidden; }
+.manifesto-panel { position: absolute; left: -468px; top: -14px; width: 1280px; height: 800px; }
 .manifesto-state { position: absolute; inset: 0; }
 .manifesto-state > div { width: 100%; height: 100%; background: transparent; }
 .manifesto-state > div > * { display: none; }

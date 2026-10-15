@@ -10,11 +10,13 @@
 
 *, *::before, *::after { box-sizing: border-box; border: 0 solid currentColor; }
 html { background: var(--paper) url('/assets/paper-26-158-2.png') repeat; background-size: 375px 625px; }
-body { margin: 0; color: var(--ink); font-family: var(--mono); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+body { -webkit-user-select: none; user-select: none; margin: 0; color: var(--ink); font-family: var(--mono); line-height: 1.5; -webkit-font-smoothing: antialiased; }
 h1, h2, h3, h4, p, figure { margin: 0; font-size: inherit; font-weight: inherit; }
 img, svg { display: block; vertical-align: middle; }
-img { max-width: 100%; height: auto; }
+img { -webkit-user-drag: none; max-width: 100%; height: auto; }
 button, input, textarea { font: inherit; }
+:where(p, h1, h2, h3, h4, h5, h6, span, em, strong, small, a, li, blockquote, figcaption, label, input, textarea, code, pre) { -webkit-user-select: text; user-select: text; }
+:where(img, svg, svg *, canvas, video, iframe, hr) { -webkit-user-select: none; user-select: none; }
 ::selection { color: #211a13; background: #ec946e; }
 .landing-page { width: 100%; overflow: clip; background: var(--paper); }
 .design-frame { position: relative; width: 100%; overflow: clip; container-type: inline-size; }

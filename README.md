@@ -39,7 +39,7 @@ The production build exports a standalone static website to `out/`.
 
 ## Scope of this pass
 
-The desktop manifesto is one pinned section with three scroll-driven states. The first transition removes the top vertical divider; the second removes the middle horizontal divider and opens the upper part of the nested grid. Outgoing text fades and slides right; incoming text fades and slides in from the left. Scrolling upward reverses the same timeline. A stationary heading and original copy retain the source geometry. The reference manifesto lattice uses recursive half-size square subdivisions; the SVG calculates each line and dot directly. Other golden-ratio artwork retains its original proportions. Decorative chapter constructions use 8% opacity.
+The desktop manifesto is one pinned section with three scroll-driven states. The first transition removes the top vertical divider; the second removes the middle horizontal divider and opens the upper part of the nested grid. One text panel fades and slides upward on exit. The next state enters from below after a fully transparent interval, so copy never overlaps. Scrolling upward reverses the same timeline. A stationary heading and original copy retain the source geometry. The reference manifesto lattice uses recursive half-size square subdivisions; the SVG calculates each line and dot directly and ends with one terminal corner dot. Other golden-ratio artwork retains its original proportions. Decorative chapter constructions use 8% opacity. Branding appears in the hero header only; repeated section headers are removed. Text remains selectable; artwork, diagrams, and decorative elements do not.
 
 Lenis smooths wheel scrolling, while touch scrolling remains native. With reduced motion enabled, Lenis is disabled and all three manifesto states appear in normal document flow. The supplied mobile composition stays in its original reading layout.
 
@@ -67,7 +67,7 @@ Figma copy is preserved, including provisional statistics labels and example not
 
 The build and strict TypeScript checks pass. Browser checks cover 390, 768, 1280, and 1440px widths, image decoding, font loading, JavaScript errors, missing assets, and horizontal overflow. Screenshots and reports are stored locally in the ignored `verification/` directory.
 
-`node scripts/check-manifesto.mjs` verifies wheel interpolation, both transitions in both directions, divider states, pin/release, line opacity, resizing, reduced motion, and mobile.
+`node scripts/check-manifesto.mjs` verifies wheel interpolation, continuous scrolling and abrupt jumps in both directions, a single vertical text panel, divider states, pin/release, line opacity, one terminal dot, one header, text-only selection, resizing, reduced motion, and mobile. See `MOTION_NOTES.md` for the researched motion decisions and source links.
 
 `scripts/check-visuals.mjs` runs the browser checks against `VISUAL_PREVIEW_URL` (defaults to `http://localhost:3000`). It uses the Chromium installation available in the original workspace; adjust `executablePath` for another machine.
 

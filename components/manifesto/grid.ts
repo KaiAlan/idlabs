@@ -3,7 +3,7 @@
 export type GridPart = 'fixed' | 'top-divider' | 'middle-divider' | 'upper-nested';
 export type Segment = { x1: number; y1: number; x2: number; y2: number; part: GridPart };
 export type Dot = { x: number; y: number; part: GridPart };
-export const GRID = { x: 468, y: 14, size: 766, ratio: 0.5, levels: 7 } as const;
+export const GRID = { x: 468, y: 14, size: 766, ratio: 0.5, levels: 5 } as const;
 
 export function createManifestoGrid() {
   const lines: Segment[] = [];
@@ -42,7 +42,10 @@ export function createManifestoGrid() {
     for (const [px,py] of [[sx,my],[mx,my],[sx+side,my],[mx,sy+side]]) dot(px,py);
     sx = mx; sy = my; side = next;
   }
-  return { lines, dots: [...dots.values()] };
+  // Collapse the final tiny square to its bottom-right terminal dot.
+  const terminalDots = [...dots.values()].filter(point =>
+    point.x < sx || point.y < sy || (point.x === right && point.y === bottom));
+  return { lines, dots: terminalDots, terminal: { x: sx, y: sy, right, bottom } };
 }
 
 export const manifestoGrid = createManifestoGrid();

@@ -54,21 +54,6 @@ export default function Design26_2335() {
           SCROLL TO LEARN THE SECRET
         </p>
       </div>
-      <p className="d26_2335_16" data-node-id="26:2346">
-        <span className="d26_2335_17">Identity</span>
-        <span className="d26_2335_18">{` `}</span>
-        <span className="d26_2335_19">Labs</span>
-      </p>
-      <p className="d26_2335_20" data-node-id="26:2347">
-        The science of virality
-        <br aria-hidden />
-        is replicable.
-      </p>
-      <p className="d26_2335_21" data-node-id="26:2348">
-        world’s first
-        <br aria-hidden />
-        content science firm.
-      </p>
       <div className="d26_2335_22" data-node-id="26:2349" data-name="Golden Ratio Construction">
         <div className="d26_2335_23" data-node-id="26:2350" data-name="Rectangle" />
         <div className="d26_2335_24" data-node-id="26:2351" data-name="Icon">

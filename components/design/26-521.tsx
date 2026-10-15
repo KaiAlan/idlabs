@@ -71,21 +71,6 @@ export default function Design26_521() {
           <div className="d26_521_34" data-name="image 630" />
         </div>
       </div>
-      <p className="d26_521_35" data-node-id="26:546">
-        <span className="d26_521_36">Identity</span>
-        <span className="d26_521_37">{` `}</span>
-        <span className="d26_521_38">Labs</span>
-      </p>
-      <p className="d26_521_39" data-node-id="26:547">
-        The science of virality
-        <br aria-hidden />
-        is replicable.
-      </p>
-      <p className="d26_521_40" data-node-id="26:548">
-        world’s first
-        <br aria-hidden />
-        content science firm.
-      </p>
     </div>
   );
 }

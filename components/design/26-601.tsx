@@ -50,21 +50,6 @@ export default function Design26_601() {
           <div className="d26_601_16" data-name="image 630" />
         </div>
       </div>
-      <p className="d26_601_17" data-node-id="26:610">
-        <span className="d26_601_18">Identity</span>
-        <span className="d26_601_19">{` `}</span>
-        <span className="d26_601_20">Labs</span>
-      </p>
-      <p className="d26_601_21" data-node-id="26:611">
-        The science of virality
-        <br aria-hidden />
-        is replicable.
-      </p>
-      <p className="d26_601_22" data-node-id="26:612">
-        world’s first
-        <br aria-hidden />
-        content science firm.
-      </p>
       <div className="d26_601_23" data-node-id="26:613" style={{ backgroundImage: "linear-gradient(166.68332810170278deg, rgba(255, 254, 249, 0) 12.423%, rgb(207, 202, 191) 88.843%)" }} data-name="Small tweet (484)">
         <div className="d26_601_24" data-node-id="26:614" data-name="Title bar">
           <div className="d26_601_25" data-node-id="26:615" data-name="Left tools">

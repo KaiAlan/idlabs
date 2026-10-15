@@ -27,21 +27,6 @@ export default function Design26_646() {
           <div className="d26_646_14" data-name="image 630" />
         </div>
       </div>
-      <p className="d26_646_15" data-node-id="26:655">
-        <span className="d26_646_16">Identity</span>
-        <span className="d26_646_17">{` `}</span>
-        <span className="d26_646_18">Labs</span>
-      </p>
-      <p className="d26_646_19" data-node-id="26:656">
-        The science of virality
-        <br aria-hidden />
-        is replicable.
-      </p>
-      <p className="d26_646_20" data-node-id="26:657">
-        world’s first
-        <br aria-hidden />
-        content science firm.
-      </p>
       <div className="d26_646_21" data-node-id="26:658">
         <p className="d26_646_22" data-node-id="26:659">
           Our writers are followed by the people you are trying to reach

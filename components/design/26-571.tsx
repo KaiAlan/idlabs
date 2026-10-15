@@ -33,21 +33,6 @@ export default function Design26_571() {
           <div className="d26_571_17" data-name="image 630" />
         </div>
       </div>
-      <p className="d26_571_18" data-node-id="26:583">
-        <span className="d26_571_19">Identity</span>
-        <span className="d26_571_20">{` `}</span>
-        <span className="d26_571_21">Labs</span>
-      </p>
-      <p className="d26_571_22" data-node-id="26:584">
-        The science of virality
-        <br aria-hidden />
-        is replicable.
-      </p>
-      <p className="d26_571_23" data-node-id="26:585">
-        world’s first
-        <br aria-hidden />
-        content science firm.
-      </p>
       <div className="d26_571_24" data-node-id="26:586" data-name="image 648" />
       <div className="d26_571_25" data-node-id="26:587">
         <div className="d26_571_26">

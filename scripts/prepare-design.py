@@ -127,6 +127,18 @@ def prepare(path):
     code=path.read_text()
     name='Design'+('Hero' if section=='hero' else section.replace('-','_'))
     code=re.sub(r'export default function \w+\(',f'export default function {name}(',code)
+    # The site has one branding header, in the hero only.
+    repeated_headers = {
+        '26-2335': ['26:2346', '26:2347', '26:2348'],
+        '26-521': ['26:546', '26:547', '26:548'],
+        '26-549': ['26:561', '26:562', '26:563'],
+        '26-571': ['26:583', '26:584', '26:585'],
+        '26-601': ['26:610', '26:611', '26:612'],
+        '26-646': ['26:655', '26:656', '26:657'],
+    }
+    for header_id in repeated_headers.get(section, []):
+        # Hide source header nodes after class numbering to keep measured styles stable.
+        code = re.sub(r'(<p\b[^>]*data-node-id="' + re.escape(header_id) + r'")', r'\1 hidden', code)
     if section=='26-2450':
         code=code.replace('{`Become impossible to `}</span>', 'Become impossible</span><br/><span className="font-[\'Instrument_Serif:Regular\'] leading-none not-italic text-[120px]">to </span>')
     if section=='26-2335':
