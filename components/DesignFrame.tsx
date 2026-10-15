@@ -21,6 +21,9 @@ export default function DesignFrame({ children, width = 1280, height, label, cla
     const update = () => {
       const availableWidth = element.clientWidth;
       const viewportHeight = window.innerHeight;
+      // Responsive and reduced-motion variants are mounted while hidden.
+      // Wait for ResizeObserver to report a visible frame before dividing.
+      if (availableWidth <= 0 || viewportHeight <= 0) return;
       if (availableWidth === previousWidth && viewportHeight === previousViewportHeight) return;
       previousWidth = availableWidth;
       previousViewportHeight = viewportHeight;
